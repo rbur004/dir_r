@@ -6,23 +6,29 @@
 
 ## DESCRIPTION:
 
-FIX (describe your package)
+Simple recursive walk through a directory, yielding the directory, filename and if the entry is a symbolic link.
 
 ## FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+* Symbolic links, that point nowhere, are skipped.
+* Symbolic links, that point to directories, are skipped to avoid loops, double processing, and/or escaping the dir tree.
 
 ## SYNOPSIS:
 
-  FIX (code sample of usage)
+  ```
+   require 'dir_r'
+   DirR.walk_dir(directory: "#{__dir__}/test_dir", walk_sub_directories: true, ignore_symlinks: true) do |dir,fn,link|
+     puts "Directory Path: #{dir} Filename: #{fn} Is a link: #{link}"
+   end
+  ```
 
 ## REQUIREMENTS:
 
-* FIX (list of requirements)
+* require 'dir_r'
 
 ## INSTALL:
 
-* FIX (sudo gem install, anything else)
+* sudo gem install dir_r
 
 ## LICENSE:
 
