@@ -7,13 +7,13 @@
 # We also ignore special files (i.e. sockets, dev nodes, ...)
 # 
 class DirR
-  VERSION = '1.0.0'
+  VERSION = '1.0.1'
   # Directory listing. Ignoring symbolic links
   #
   # @param directory [String] directory to list
   # @param walk_sub_directories [Boolean] Recurse through the subdirectories
   # @param ignore_symlinks [Boolean] Skip over symbolic links to files
-  # @yield [String, String, Boolean] Directory path, Filename, Symbolic Link true/false
+  # @yield [String, String, Boolean] Directory path, Filename, Symbolic Link true/false (only if ! ignore_symlinks)
   def self.walk_dir(directory:, walk_sub_directories: true, ignore_symlinks: true, debug: false, &block)
     puts "In #{directory}" if debug
     Dir.open(directory).each do |filename|
@@ -42,8 +42,10 @@ class DirR
           end
         elsif stat_record.file? 
           # Ordinary file and not a link, or we are accepting links
-          if !link || (link && !ignore_symlinks)
+          if !ignore_symlinks
             yield directory, filename, link
+          elsif !link
+            yield directory, filename
           end
         end
       end
