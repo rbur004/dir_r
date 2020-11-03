@@ -11,6 +11,8 @@ Hoe.spec PROJECT do
   
   self.yard_title = PROJECT
   self.yard_options = ['--markup', 'markdown', '--protected']
+
+  self.dependency 'wikk_json', ['~> 0.1', '>= 0.1.0'], type=:dev
 end
 
 
