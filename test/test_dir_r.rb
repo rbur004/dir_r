@@ -1,7 +1,8 @@
 #!/usr/local/bin/ruby
 require "test/unit"
 require 'wikk_json'
-require_relative "../lib/dir_r.rb"
+#require_relative "../lib/dir_r.rb"
+require 'dir_r'
 
 class TestDirR < Test::Unit::TestCase
   def test_walk_dir_no_links
